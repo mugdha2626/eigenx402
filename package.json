@@ -1,0 +1,30 @@
+{
+  "name": "eigenx402-payperproof",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:server": "npm run dev --workspace=packages/server",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:compute": "npm run dev --workspace=packages/compute-app",
+    "build:all": "npm run build --workspaces",
+    "build:compute": "npm run build --workspace=packages/compute-app",
+    "build:server": "npm run build --workspace=packages/server",
+    "build:web": "npm run build --workspace=apps/web",
+    "docker:build": "cd packages/compute-app && docker build -t eigenx402/compute-app:latest .",
+    "docker:push": "docker push eigenx402/compute-app:latest",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
