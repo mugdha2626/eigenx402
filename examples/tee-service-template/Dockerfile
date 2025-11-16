@@ -13,7 +13,8 @@ COPY package*.json ./
 COPY tsconfig.json ./
 
 # Install dependencies
-RUN npm ci --production
+# Use npm install if package-lock.json doesn't exist, otherwise use npm ci
+RUN if [ -f package-lock.json ]; then npm ci --omit=dev; else npm install --production; fi
 
 # Copy source code
 COPY src ./src
