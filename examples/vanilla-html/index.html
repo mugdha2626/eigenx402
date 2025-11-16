@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EigenX402 Payment Gateway - Vanilla HTML Example</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      text-align: center;
+      color: white;
+      margin-bottom: 60px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+      margin-bottom: 20px;
+      color: #111827;
+    }
+
+    .section p {
+      color: #6b7280;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .example-box {
+      padding: 20px;
+      background: #f9fafb;
+      border-radius: 12px;
+      border: 2px solid #e5e7eb;
+    }
+
+    .example-box h3 {
+      margin-bottom: 16px;
+      color: #111827;
+      font-size: 18px;
+    }
+
+    .code {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>🚀 EigenX402 Payment Gateway</h1>
+      <p>Payment widgets with x402 protocol + EigenCompute verification</p>
+    </div>
+
+    <!-- Example 1: Full AI Widget -->
+    <div class="section">
+      <h2>Example 1: AI Assistant Widget</h2>
+      <p>Full widget with input form for AI inference. Users can ask questions and get verified responses.</p>
+      
+      <eigenx402-widget
+        api-url="http://localhost:3001"
+        endpoint="/api/jobs"
+        price="0.05"
+        title="AI Assistant"
+        description="Ask me anything! Powered by EigenAI"
+        mode="ai"
+        model="gpt-oss-120b-f16">
+      </eigenx402-widget>
+
+      <div class="code">
+&lt;eigenx402-widget
+  api-url="http://localhost:3001"
+  price="0.05"
+  title="AI Assistant"
+  mode="ai"&gt;
+&lt;/eigenx402-widget&gt;
+      </div>
+    </div>
+
+    <!-- Example 2: Generic Payment Widget -->
+    <div class="section">
+      <h2>Example 2: Generic API Payment</h2>
+      <p>Generic widget for any paid API call with verifiable compute.</p>
+      
+      <eigenx402-widget
+        api-url="http://localhost:3001"
+        endpoint="/api/resource"
+        price="1.00"
+        title="Premium Resource"
+        description="Access premium API resources"
+        mode="generic"
+        button-text="Pay & Access">
+      </eigenx402-widget>
+
+      <div class="code">
+&lt;eigenx402-widget
+  api-url="http://localhost:3001"
+  endpoint="/api/resource"
+  price="1.00"
+  title="Premium Resource"
+  mode="generic"&gt;
+&lt;/eigenx402-widget&gt;
+      </div>
+    </div>
+
+    <!-- Example 3: Payment Buttons -->
+    <div class="section">
+      <h2>Example 3: Payment Buttons</h2>
+      <p>Simple buttons for one-click payments. Perfect for paywalls and premium features.</p>
+      
+      <div class="grid">
+        <div class="example-box">
+          <h3>Premium Content</h3>
+          <eigenx402-button
+            api-url="http://localhost:3001"
+            endpoint="/api/premium-article"
+            price="0.50"
+            label="Read Premium Article">
+          </eigenx402-button>
+        </div>
+
+        <div class="example-box">
+          <h3>Data Export</h3>
+          <eigenx402-button
+            api-url="http://localhost:3001"
+            endpoint="/api/export-data"
+            price="2.00"
+            label="Export Data">
+          </eigenx402-button>
+        </div>
+
+        <div class="example-box">
+          <h3>Unlock Feature</h3>
+          <eigenx402-button
+            api-url="http://localhost:3001"
+            endpoint="/api/unlock"
+            price="0.10"
+            label="Unlock Premium">
+          </eigenx402-button>
+        </div>
+      </div>
+
+      <div class="code">
+&lt;eigenx402-button
+  api-url="http://localhost:3001"
+  endpoint="/api/premium-feature"
+  price="0.50"
+  label="Unlock Now"&gt;
+&lt;/eigenx402-button&gt;
+      </div>
+    </div>
+
+    <!-- Event Handling Example -->
+    <div class="section">
+      <h2>Example 4: Event Handling</h2>
+      <p>Listen to payment events with JavaScript.</p>
+
+      <div id="event-demo"></div>
+
+      <div class="code">
+&lt;script&gt;
+  const button = document.querySelector('eigenx402-button');
+  
+  button.addEventListener('payment-success', (event) => {
+    console.log('Payment successful!', event.detail);
+    console.log('TX Hash:', event.detail.txHash);
+    console.log('Proof:', event.detail.proof);
+  });
+  
+  button.addEventListener('payment-error', (event) => {
+    console.error('Payment failed:', event.detail.error);
+  });
+&lt;/script&gt;
+      </div>
+    </div>
+  </div>
+
+  <!-- Load the widget library -->
+  <script src="../../packages/widget/dist/widget.js"></script>
+  <script src="../../packages/widget/dist/button-widget.js"></script>
+
+  <!-- Event handling demo -->
+  <script>
+    // Create a button with event handlers
+    const demoContainer = document.getElementById('event-demo');
+    const button = document.createElement('eigenx402-button');
+    button.setAttribute('api-url', 'http://localhost:3001');
+    button.setAttribute('endpoint', '/api/demo');
+    button.setAttribute('price', '0.01');
+    button.setAttribute('label', 'Try with Events');
+
+    button.addEventListener('payment-success', (event) => {
+      alert('Payment successful! Check console for details.');
+      console.log('Payment details:', event.detail);
+    });
+
+    button.addEventListener('payment-error', (event) => {
+      alert('Payment failed: ' + event.detail.error);
+      console.error('Error details:', event.detail);
+    });
+
+    demoContainer.appendChild(button);
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "name": "@eigenx402/widget-react",
+  "version": "1.0.0",
+  "description": "React components for EigenX402 payment gateway. Accept crypto payments with x402 + EigenCompute verification.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "payment",
+    "gateway",
+    "widget",
+    "crypto",
+    "web3",
+    "x402",
+    "eigencompute",
+    "usdc",
+    "component"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mugdha2626/eigenx402.git",
+    "directory": "packages/widget-react"
+  },
+  "homepage": "https://github.com/mugdha2626/eigenx402#readme",
+  "bugs": {
+    "url": "https://github.com/mugdha2626/eigenx402/issues"
+  },
+  "author": "mugdha2626",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "eigenx402-widget": "^1.0.0",
+    "@eigenx402/types": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

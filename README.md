@@ -1,45 +1,99 @@
-# EigenX402 - Pay-per-Proof AI
+# EigenX402 Payment Gateway
 
-**"Stripe for Web3"** - Pay-as-you-go AI inference with cryptocurrency payments and cryptographic proof.
+**Universal payment gateway with x402 protocol + EigenCompute verification**
 
-Just like Stripe makes payments simple, EigenX402 makes crypto-paid AI inference simple. Users pay in USDC, get verifiable AI responses with cryptographic proof.
+Drop-in payment widgets for any website or dApp. Accept crypto payments with cryptographic proof of execution.
 
-## Why This is "Stripe for Web3"
+## What is EigenX402?
 
-| Stripe | EigenX402 |
-|--------|-----------|
-| `stripe.charges.create()` | `client.createAndPayJob()` |
-| Credit card → fiat payment | MetaMask → USDC payment |
-| Payment confirmation | Blockchain transaction hash |
-| Simple SDK integration | Simple SDK integration |
-| Handles payment complexity | Handles crypto payment complexity |
+A complete payment gateway platform that combines:
+- **x402 Protocol** - Standard for HTTP-based crypto payments (by Coinbase)
+- **EigenCompute** - Trusted Execution Environment for verifiable computation
+- **USDC Payments** - Stablecoin payments on Base Layer 2
+- **Drop-in Widgets** - Embeddable payment components (3 lines of code)
 
-## Simple Integration (3 lines of code!)
+## Why Use EigenX402?
 
-```typescript
-const client = new EigenX402Client({ serverUrl, signer });
-const result = await client.createAndPayJob({ prompt, model, seed });
-// result = { output, proof, txHash } - Done!
+| Traditional Payments | EigenX402 |
+|---------------------|-----------|
+| Credit card processing | Crypto wallet payments |
+| Trust payment processor | Cryptographic verification |
+| High fees (2-3%) | Low L2 fees (<$0.01) |
+| Chargebacks | Immutable settlements |
+| Complex integration | 3 lines of code |
+| API keys & servers | Wallet-based auth |
+
+## Quick Start - Widget Integration
+
+Add a payment gateway to any website in 3 lines:
+
+```html
+<!-- 1. Include the widget -->
+<script src="https://cdn.eigenx402.com/widget.js"></script>
+
+<!-- 2. Add the payment widget -->
+<eigenx402-widget
+  api-url="https://api.yourservice.com"
+  price="0.05"
+  title="Premium Content">
+</eigenx402-widget>
 ```
 
-The SDK handles:
-- ✅ HTTP 402 payment negotiation
-- ✅ EIP-3009 USDC authorization signing
-- ✅ Payment verification
-- ✅ AI inference execution
-- ✅ Cryptographic proof generation
+Or use the payment button:
+
+```html
+<eigenx402-button
+  api-url="https://api.yourservice.com"
+  endpoint="/api/resource"
+  price="1.00"
+  label="Unlock Now">
+</eigenx402-button>
+```
+
+## Quick Start - React Integration
+
+```bash
+npm install @eigenx402/widget-react
+```
+
+```tsx
+import { EigenPayWidget, EigenPayButton } from '@eigenx402/widget-react';
+
+function App() {
+  return (
+    <>
+      {/* Full widget */}
+      <EigenPayWidget
+        apiUrl="https://api.yourservice.com"
+        price="0.05"
+        title="AI Assistant"
+        mode="ai"
+      />
+
+      {/* Simple button */}
+      <EigenPayButton
+        apiUrl="https://api.yourservice.com"
+        endpoint="/api/premium"
+        price="1.00"
+        label="Unlock Premium"
+        onPaymentSuccess={(result) => console.log('Paid!', result)}
+      />
+    </>
+  );
+}
+```
 
 ## What Makes It Verifiable?
 
-When users submit a job, they see **exactly what happened behind the scenes**:
+Every payment includes **cryptographic proof from EigenCompute** TEE:
 
-1. **Payment Settled On-Chain** - Real USDC transaction on Base Sepolia (link to BaseScan)
-2. **Deterministic AI Inference** - EigenAI with fixed seed for reproducible results
-3. **Cryptographic Proof** - SHA-256 hashes of all inputs/outputs
-4. **TEE Attestation** - (When deployed) Intel SGX/AMD SEV proof of secure execution
-5. **Replay Verification** - Users can re-run to verify output matches
+1. **Payment Settled On-Chain** - Real USDC transfer on Base (view on BaseScan)
+2. **Verifiable Execution** - Code runs in Trusted Execution Environment (Intel SGX/AMD SEV)
+3. **Cryptographic Proof** - SHA-256 hashes of inputs, outputs, and container image
+4. **TEE Attestation** - Hardware-backed proof of secure execution
+5. **Replay Verification** - Anyone can verify computation was correct
 
-The UI shows all this visually with checkmarks, transaction links, and interactive verification. Users know **exactly** what they're paying for.
+Users get transparency and trust without intermediaries.
 
 ## Architecture
 
@@ -543,14 +597,59 @@ Verify job by replaying computation.
 }
 ```
 
+## Use Cases
+
+### 💰 API Paywalls
+Monetize your APIs with per-call pricing:
+```html
+<eigenx402-button
+  api-url="https://api.yourservice.com"
+  endpoint="/v1/premium-data"
+  price="0.10"
+  label="Access Data">
+</eigenx402-button>
+```
+
+### 🤖 AI Services
+Charge for AI inference with verifiable results:
+```html
+<eigenx402-widget
+  api-url="https://api.yourservice.com"
+  price="0.05"
+  title="AI Assistant"
+  mode="ai">
+</eigenx402-widget>
+```
+
+### 📄 Premium Content
+Unlock articles, videos, or downloads:
+```html
+<eigenx402-button
+  endpoint="/api/premium-article"
+  price="0.50"
+  label="Read Article">
+</eigenx402-button>
+```
+
+### ⚙️ Compute Resources
+Charge for computation, rendering, or processing:
+```html
+<eigenx402-widget
+  endpoint="/api/render-video"
+  price="2.00"
+  title="Video Rendering"
+  mode="generic">
+</eigenx402-widget>
+```
+
 ## Key Technologies
 
 - **x402 Protocol**: HTTP 402 payment standard by Coinbase
+- **EigenCompute**: Trusted Execution Environment (TEE) for verifiable compute
 - **EIP-3009**: `transferWithAuthorization` for gasless USDC payments
-- **EigenCompute**: TEE-based verifiable compute infrastructure
-- **Base Sepolia**: L2 testnet for low-cost payments
-- **Drizzle ORM**: Type-safe database access
-- **Next.js 14**: App router with React Server Components
+- **Base Layer 2**: Low-cost, fast blockchain transactions
+- **USDC**: Stablecoin payments (no volatility)
+- **Web Components**: Framework-agnostic widgets
 
 ## Security Considerations
 

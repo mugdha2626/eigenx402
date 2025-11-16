@@ -37,13 +37,99 @@ export class EigenX402Client {
   }
 
   /**
+   * Generic x402 payment flow - works with ANY x402-protected endpoint
+   *
+   * This is the universal method for making paid requests to ANY API:
+   * 1. Makes initial request (expects 402 Payment Required)
+   * 2. Signs payment authorization
+   * 3. Retries request with X-PAYMENT header
+   * 4. Returns the response (whatever your API returns)
+   *
+   * @param endpoint - API endpoint path (e.g., "/api/generate-image")
+   * @param options - Request options (method, body, headers)
+   * @returns Response from your API (typed as T)
+   */
+  async makeX402Request<T = any>(
+    endpoint: string,
+    options: {
+      method?: string;
+      body?: any;
+      headers?: Record<string, string>;
+    } = {}
+  ): Promise<T> {
+    if (!this.signer) {
+      throw new Error('Signer required for payment. Call setSigner() first.');
+    }
+
+    const url = `${this.config.serverUrl}${endpoint}`;
+    const method = options.method || 'POST';
+    const headers = {
+      'Content-Type': 'application/json',
+      ...options.headers
+    };
+
+    // Step 1: Initial request (expect 402)
+    const initialResponse = await fetch(url, {
+      method,
+      headers,
+      body: options.body ? JSON.stringify(options.body) : undefined
+    });
+
+    if (initialResponse.status !== 402) {
+      // If not 402, either it's free or there's an error
+      if (initialResponse.ok) {
+        return initialResponse.json() as Promise<T>;
+      }
+      throw new Error(`Request failed: ${initialResponse.statusText}`);
+    }
+
+    // Step 2: Parse payment requirements from 402 response
+    const paymentResponse = await initialResponse.json() as any;
+
+    if (!paymentResponse.paymentRequired?.accepts?.[0]) {
+      throw new Error('Invalid 402 response: missing payment requirements');
+    }
+
+    const paymentRequirement = paymentResponse.paymentRequired.accepts[0];
+    const signerAddress = await this.signer.getAddress();
+
+    // Step 3: Sign payment authorization
+    const paymentPayload = await signPaymentAuthorization(
+      this.signer,
+      {
+        from: signerAddress,
+        to: paymentRequirement.payTo,
+        value: paymentRequirement.maxAmountRequired,
+        network: paymentRequirement.network,
+        asset: paymentRequirement.asset
+      }
+    );
+
+    // Step 4: Retry request with payment
+    const paymentHeader = Buffer.from(JSON.stringify(paymentPayload)).toString('base64');
+
+    const paidResponse = await fetch(url, {
+      method,
+      headers: {
+        ...headers,
+        'X-PAYMENT': paymentHeader
+      },
+      body: options.body ? JSON.stringify(options.body) : undefined
+    });
+
+    if (!paidResponse.ok) {
+      const error = await paidResponse.json() as any;
+      throw new Error(`Paid request failed: ${error.error || paidResponse.statusText}`);
+    }
+
+    return paidResponse.json() as Promise<T>;
+  }
+
+  /**
    * Create a new job and automatically handle payment
    *
-   * This is the main entry point for users. It:
-   * 1. Creates a job (gets 402 response)
-   * 2. Signs payment authorization
-   * 3. Submits payment and runs the job
-   * 4. Returns the result with proof
+   * This is a convenience method for the AI inference use case.
+   * For generic x402 requests, use makeX402Request() instead.
    *
    * @param options - Job creation options (prompt, model, seed)
    * @returns Job result with output and proof

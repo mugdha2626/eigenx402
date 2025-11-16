@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEE Service Integration - EigenX402</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+      margin-bottom: 20px;
+      color: #111827;
+      font-size: 24px;
+    }
+
+    .section p {
+      color: #6b7280;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .service-card {
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 30px;
+      border: 2px solid #e5e7eb;
+    }
+
+    .service-card h3 {
+      color: #111827;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .service-card .price {
+      display: inline-block;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      overflow-x: auto;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #fbbf24;
+    }
+
+    .info-box {
+      background: #dbeafe;
+      border-left: 4px solid #3b82f6;
+      padding: 16px;
+      margin: 20px 0;
+      border-radius: 6px;
+    }
+
+    .info-box strong {
+      color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="badge">🔒 Powered by EigenCompute TEE</div>
+      <h1>Custom TEE Service Integration</h1>
+      <p>Build ANY paid API service running in a Trusted Execution Environment</p>
+    </div>
+
+    <!-- Info Section -->
+    <div class="section">
+      <h2>What is This?</h2>
+      <p>
+        This example shows how to integrate the EigenX402 widget with your own custom TEE service.
+        You can build <strong>any type of paid API</strong> (AI, image processing, data transformation, etc.)
+        and monetize it with crypto payments.
+      </p>
+
+      <div class="info-box">
+        <strong>💡 How it works:</strong> Your backend runs in EigenCompute TEE with x402 middleware.
+        The widget handles wallet connection, payment signing, and API calls automatically.
+        Users pay with USDC on Base L2 (low fees, instant settlement).
+      </div>
+
+      <h3>Quick Integration (3 steps):</h3>
+      <div class="code-block">
+<span class="highlight"><!-- 1. Include the widget script --></span>
+&lt;script src="https://cdn.eigenx402.com/widget.js"&gt;&lt;/script&gt;
+
+<span class="highlight"><!-- 2. Add widget to your HTML --></span>
+&lt;eigenx402-widget
+  api-url="https://my-tee-service.eigencloud.xyz"
+  endpoint="/api/your-endpoint"
+  price="0.05"&gt;
+&lt;/eigenx402-widget&gt;
+
+<span class="highlight"><!-- 3. That's it! Widget handles everything --></span>
+      </div>
+    </div>
+
+    <!-- Example Services -->
+    <div class="section">
+      <h2>Example Services You Can Build</h2>
+      <p>Try these live examples (running on our TEE service template):</p>
+
+      <div class="grid">
+        <!-- Example 1: AI Text Generation -->
+        <div class="service-card">
+          <h3>🤖 AI Text Generation</h3>
+          <span class="price">$0.05 USDC</span>
+          <p>Generate text with verifiable AI inference running in TEE</p>
+
+          <eigenx402-widget
+            api-url="http://localhost:8080"
+            endpoint="/api/generate-text"
+            price="0.05"
+            title="AI Text Generator"
+            description="Enter a prompt to generate text with proof of computation"
+            mode="ai">
+          </eigenx402-widget>
+        </div>
+
+        <!-- Example 2: Image Processing -->
+        <div class="service-card">
+          <h3>🖼️ Image Processing</h3>
+          <span class="price">$0.10 USDC</span>
+          <p>Process images with filters, resize, or transformations</p>
+
+          <eigenx402-widget
+            api-url="http://localhost:8080"
+            endpoint="/api/process-image"
+            price="0.10"
+            title="Image Processor"
+            description="Enter image URL and processing parameters"
+            mode="generic">
+          </eigenx402-widget>
+        </div>
+
+        <!-- Example 3: Data Transformation -->
+        <div class="service-card">
+          <h3>📊 Data Transform</h3>
+          <span class="price">$0.02 USDC</span>
+          <p>Convert data formats (CSV to JSON, aggregate, etc.)</p>
+
+          <eigenx402-widget
+            api-url="http://localhost:8080"
+            endpoint="/api/transform-data"
+            price="0.02"
+            title="Data Transformer"
+            description="Enter data and transformation type"
+            mode="generic">
+          </eigenx402-widget>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Button Examples -->
+    <div class="section">
+      <h2>Simple Payment Buttons</h2>
+      <p>For single-click payments without forms:</p>
+
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+        <eigenx402-button
+          api-url="http://localhost:8080"
+          endpoint="/api/generate-text"
+          price="0.05"
+          label="Generate AI Text">
+        </eigenx402-button>
+
+        <eigenx402-button
+          api-url="http://localhost:8080"
+          endpoint="/api/process-image"
+          price="0.10"
+          label="Process Image">
+        </eigenx402-button>
+
+        <eigenx402-button
+          api-url="http://localhost:8080"
+          endpoint="/api/transform-data"
+          price="0.02"
+          label="Transform Data">
+        </eigenx402-button>
+      </div>
+
+      <div class="code-block" style="margin-top: 30px;">
+<span class="highlight"><!-- Payment Button Example --></span>
+&lt;eigenx402-button
+  api-url="https://my-tee-service.eigencloud.xyz"
+  endpoint="/api/premium-feature"
+  price="0.10"
+  label="Unlock Premium"&gt;
+&lt;/eigenx402-button&gt;
+      </div>
+    </div>
+
+    <!-- Event Handling -->
+    <div class="section">
+      <h2>Custom Event Handling</h2>
+      <p>Listen to payment events for custom logic:</p>
+
+      <div class="code-block">
+<span class="highlight">// Listen for successful payments</span>
+document.querySelector('eigenx402-widget').addEventListener('payment-success', (event) => {
+  console.log('Payment successful!', event.detail);
+
+  // event.detail contains:
+  // - result: Response from your API
+  // - proof: Cryptographic proof (if provided)
+  // - txHash: Payment transaction hash
+
+  // Your custom logic here
+  showSuccessMessage();
+  unlockContent();
+  trackAnalytics('payment_success');
+});
+
+<span class="highlight">// Listen for payment errors</span>
+document.querySelector('eigenx402-widget').addEventListener('payment-error', (event) => {
+  console.error('Payment failed:', event.detail.error);
+
+  // Your error handling
+  showErrorMessage(event.detail.error);
+});
+      </div>
+
+      <div id="event-demo" style="margin-top: 20px;">
+        <h3>Try it:</h3>
+        <eigenx402-button
+          id="event-button"
+          api-url="http://localhost:8080"
+          endpoint="/api/generate-text"
+          price="0.05"
+          label="Test Event Handling">
+        </eigenx402-button>
+
+        <div id="event-log" style="
+          margin-top: 20px;
+          padding: 16px;
+          background: #f3f4f6;
+          border-radius: 8px;
+          min-height: 100px;
+          font-family: monospace;
+          font-size: 13px;
+          color: #374151;
+        ">
+          <div>Event log will appear here...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Build Your Own -->
+    <div class="section">
+      <h2>🚀 Build Your Own TEE Service</h2>
+      <p>
+        Ready to build your own paid API? Use our TEE service template:
+      </p>
+
+      <div class="code-block">
+<span class="highlight"># 1. Copy the template</span>
+cd examples/tee-service-template
+
+<span class="highlight"># 2. Install dependencies</span>
+npm install
+
+<span class="highlight"># 3. Configure</span>
+cp .env.example .env
+# Edit .env with your merchant wallet
+
+<span class="highlight"># 4. Add your custom logic in src/index.ts</span>
+async function yourCustomFunction(input: any) {
+  // Your code here - can be anything!
+  // - AI inference
+  // - Image processing
+  // - Data transformation
+  // - API gateway
+  // - Confidential computing
+  return yourResult;
+}
+
+<span class="highlight"># 5. Deploy to EigenCompute TEE</span>
+npm run docker:build
+eigenx app deploy --name my-service --image my-service:latest
+
+<span class="highlight"># 6. Get your TEE URL</span>
+eigenx app info my-service
+# URL: https://my-service-abc123.eigencloud.xyz
+
+<span class="highlight"># 7. Use in widget</span>
+&lt;eigenx402-widget
+  api-url="https://my-service-abc123.eigencloud.xyz"
+  endpoint="/api/your-endpoint"
+  price="0.05"&gt;
+&lt;/eigenx402-widget&gt;
+      </div>
+
+      <div class="info-box">
+        <strong>📚 Learn more:</strong> See
+        <code>examples/tee-service-template/README.md</code> for complete documentation
+        and examples.
+      </div>
+    </div>
+  </div>
+
+  <!-- Load the widget -->
+  <script src="../../packages/widget/dist/widget.js"></script>
+
+  <!-- Event handling demo -->
+  <script>
+    const eventButton = document.getElementById('event-button');
+    const eventLog = document.getElementById('event-log');
+
+    function logEvent(type, message, data) {
+      const timestamp = new Date().toLocaleTimeString();
+      const color = type === 'success' ? '#059669' : type === 'error' ? '#dc2626' : '#6b7280';
+
+      eventLog.innerHTML += `
+        <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px; border-left: 3px solid ${color};">
+          <strong style="color: ${color};">[${timestamp}] ${type.toUpperCase()}</strong><br>
+          ${message}
+          ${data ? '<pre style="margin-top: 4px; font-size: 11px;">' + JSON.stringify(data, null, 2) + '</pre>' : ''}
+        </div>
+      `;
+
+      eventLog.scrollTop = eventLog.scrollHeight;
+    }
+
+    if (eventButton) {
+      eventButton.addEventListener('payment-success', (event) => {
+        logEvent('success', 'Payment successful!', event.detail);
+      });
+
+      eventButton.addEventListener('payment-error', (event) => {
+        logEvent('error', 'Payment failed', { error: event.detail.error });
+      });
+
+      eventButton.addEventListener('click', () => {
+        logEvent('info', 'Payment button clicked', null);
+      });
+    }
+
+    // Log when widgets are loaded
+    window.addEventListener('load', () => {
+      logEvent('info', 'Widgets loaded successfully', null);
+    });
+  </script>
+</body>
+</html>
