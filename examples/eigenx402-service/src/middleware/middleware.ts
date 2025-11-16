@@ -107,5 +107,8 @@ function send402Response(
 ): void {
   const paymentRequired: X402PaymentRequired = createPaymentRequirement(req, options);
 
-  res.status(402).json(paymentRequired);
+  // Wrap in paymentRequired for client compatibility
+  res.status(402).json({
+    paymentRequired
+  });
 }

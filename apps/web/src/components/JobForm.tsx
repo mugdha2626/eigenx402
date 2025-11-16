@@ -38,11 +38,14 @@ export function JobForm({ signer, onLoading, onComplete, onError }: JobFormProps
         signerOrProvider: signer,
       });
 
-      // Create and pay for job
-      const result = await client.createAndPayJob({
-        prompt,
-        model,
-        seed,
+      // Use generic x402 request for TEE service
+      const result = await client.makeX402Request('/api/generate-text', {
+        method: 'POST',
+        body: {
+          prompt,
+          model,
+          seed,
+        },
       });
 
       onComplete(result);

@@ -127,21 +127,6 @@
     </div>
 
     <div class="widget-section">
-      <h2 class="section-title">Integration</h2>
-      <div class="code-block">
-<code>&lt;!-- 1. Include the widget script --&gt;
-&lt;script src="./widget.js"&gt;&lt;/script&gt;
-
-&lt;!-- 2. Add the widget to your page --&gt;
-&lt;eigenx402-ai
-  api-url="http://localhost:3001"
-  model="gpt-oss-120b-f16"
-  price="0.05"&gt;
-&lt;/eigenx402-ai&gt;</code>
-      </div>
-    </div>
-
-    <div class="widget-section">
       <h2 class="section-title">Live Demo</h2>
       <p style="margin-bottom: 20px; color: #6b7280;">
         Try it now! Connect your wallet and ask a question. Payment is $0.05 USDC on Base Sepolia.
@@ -149,7 +134,8 @@
 
       <!-- THE ACTUAL WIDGET -->
       <eigenx402-ai
-        api-url="http://localhost:3001"
+        api-url="http://35.227.35.220:8080"
+        endpoint="/api/generate-text"
         model="gpt-oss-120b-f16"
         price="0.05">
       </eigenx402-ai>
@@ -183,6 +169,6 @@
   </div>
 
   <!-- Widget Script -->
-  <script src="./widget.js"></script>
+  <script src="./widget.js?v=2"></script>
 </body>
 </html>
