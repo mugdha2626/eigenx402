@@ -8,16 +8,17 @@ USER root
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-COPY tsconfig.json ./
+# Copy package files and workspace dependencies
+# This Dockerfile should be run from the monorepo root with:
+# docker build -f examples/tee-service-template/Dockerfile .
+COPY packages/types ./packages/types
+COPY packages/server-sdk ./packages/server-sdk
+COPY examples/tee-service-template/package*.json ./
+COPY examples/tee-service-template/tsconfig.json ./
+COPY examples/tee-service-template/src ./src
 
 # Install dependencies
-# Use npm install if package-lock.json doesn't exist, otherwise use npm ci
-RUN if [ -f package-lock.json ]; then npm ci --omit=dev; else npm install --production; fi
-
-# Copy source code
-COPY src ./src
+RUN npm install --production
 
 # Build TypeScript
 RUN npm install -g typescript
