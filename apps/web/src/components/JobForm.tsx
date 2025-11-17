@@ -38,7 +38,7 @@ export function JobForm({ signer, onLoading, onComplete, onError }: JobFormProps
         signerOrProvider: signer,
       });
 
-      // Use generic x402 request for TEE service
+      // Use TEE service endpoint
       const result = await client.makeX402Request('/api/generate-text', {
         method: 'POST',
         body: {

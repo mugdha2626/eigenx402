@@ -7,6 +7,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { requirePayment } from './middleware';
+import { callEigenAI } from './inference';
 
 dotenv.config();
 
@@ -17,9 +18,16 @@ const PORT = parseInt(process.env.PORT || '8080', 10);
 app.use(cors());
 app.use(express.json());
 
+// Helper: Convert USDC dollars to atomic units (6 decimals)
+function toUSDCAtomicUnits(dollars: string | number): string {
+  const amount = typeof dollars === 'string' ? parseFloat(dollars) : dollars;
+  return Math.floor(amount * 1_000_000).toString();
+}
+
 // Payment configuration
 const PAYMENT_CONFIG = {
-  price: process.env.PRICE_USDC || '0.05',
+  priceUSD: process.env.PRICE_USDC || '0.05',
+  priceAtomic: toUSDCAtomicUnits(process.env.PRICE_USDC || '0.05'),
   merchantWallet: process.env.MERCHANT_WALLET!,
   merchantPrivateKey: process.env.MERCHANT_PRIVATE_KEY,
   usdcAddress: process.env.USDC_ADDRESS || '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
@@ -50,7 +58,7 @@ app.get('/health', (req, res) => {
 
 app.post('/api/generate-text',
   requirePayment({
-    amount: PAYMENT_CONFIG.price,
+    amount: PAYMENT_CONFIG.priceAtomic,
     asset: PAYMENT_CONFIG.usdcAddress,
     network: PAYMENT_CONFIG.network,
     payTo: PAYMENT_CONFIG.merchantWallet,
@@ -61,32 +69,48 @@ app.post('/api/generate-text',
   }),
   async (req, res) => {
     try {
-      const { prompt, seed } = req.body;
+      const { prompt, model, seed } = req.body;
 
-      // Demo: Generate text (replace with your actual AI logic)
-      const responses = [
-        `Based on your prompt "${prompt}", here is a generated response from the TEE.`,
-        `Analyzing "${prompt}"... The answer requires considering multiple factors in a secure environment.`,
-        `In response to "${prompt}", the TEE has processed your request securely.`
-      ];
+      // Validate inputs
+      if (!prompt || typeof prompt !== 'string') {
+        return res.status(400).json({ error: 'Invalid prompt' });
+      }
 
-      const output = responses[seed % responses.length];
+      const jobModel = model || process.env.MODEL_ID || 'gpt-oss-120b-f16';
+      const jobSeed = seed !== undefined ? seed : parseInt(process.env.DEFAULT_SEED || '42');
+
+      console.log(`[TEE] Processing request: model=${jobModel}, seed=${jobSeed}`);
+
+      // Call EigenAI API
+      const eigenaiKey = process.env.EIGENAI_API_KEY;
+      if (!eigenaiKey) {
+        throw new Error('EIGENAI_API_KEY not configured');
+      }
+
+      const output = await callEigenAI(prompt, jobModel, jobSeed, eigenaiKey);
 
       // Generate cryptographic proof
       const proof = {
-        inputHash: hashInput({ prompt, seed }),
+        modelHash: hashInput(jobModel), // Hash of the model identifier
+        inputHash: hashInput({ prompt, model: jobModel, seed: jobSeed }),
         outputHash: hashOutput(output),
-        containerImageDigest: process.env.EIGEN_IMAGE_DIGEST || 'sha256:dev',
+        containerImageDigest: process.env.EIGEN_IMAGE_DIGEST || 'sha256:local-dev',
         producedAt: new Date().toISOString(),
         attestation: process.env.EIGEN_ATTESTATION || null
       };
 
+      console.log(`[TEE] Request completed successfully`);
+
+      // Return response compatible with client SDK JobResult type
       res.json({
+        jobId: 'tee-' + Date.now(), // Generate a simple ID for tracking
         output,
         proof,
-        txHash: (req as any).txHash // From x402 middleware
+        txHash: (req as any).txHash || 'simulated-tx',
+        status: 'completed'
       });
     } catch (error: any) {
+      console.error('[TEE] Error:', error.message);
       res.status(500).json({ error: error.message });
     }
   }
@@ -98,7 +122,7 @@ app.post('/api/generate-text',
 
 app.post('/api/process-data',
   requirePayment({
-    amount: '0.10',
+    amount: toUSDCAtomicUnits('0.10'),
     asset: PAYMENT_CONFIG.usdcAddress,
     network: PAYMENT_CONFIG.network,
     payTo: PAYMENT_CONFIG.merchantWallet,
@@ -156,7 +180,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 📍 Endpoints:
    - GET  /health                (free)
-   - POST /api/generate-text     ($${PAYMENT_CONFIG.price} USDC)
+   - POST /api/generate-text     ($${PAYMENT_CONFIG.priceUSD} USDC)
    - POST /api/process-data      ($0.10 USDC)
 
 🔐 Payment Configuration:
