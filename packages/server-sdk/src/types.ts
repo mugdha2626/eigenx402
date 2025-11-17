@@ -3,7 +3,7 @@
  */
 
 import type { Request } from 'express';
-import type { X402PaymentPayload } from '@eigenx402/types';
+import type { X402PaymentPayload } from '@mugdha26/eigenx402-types';
 
 export interface PaymentMiddlewareOptions {
   amount: string; // Amount in USDC atomic units (e.g., "50000" for $0.05)

@@ -5,7 +5,7 @@
  */
 
 import { ethers } from 'ethers';
-import type { X402PaymentPayload } from '@eigenx402/types';
+import type { X402PaymentPayload } from '@mugdha26/eigenx402-types';
 
 // Note: Base Sepolia USDC uses domain name "USDC" (not "USD Coin" like mainnet)
 const EIP3009_DOMAIN_NAME = 'USDC';

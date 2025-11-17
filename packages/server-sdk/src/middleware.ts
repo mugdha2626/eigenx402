@@ -4,7 +4,7 @@
 
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import type { PaymentMiddlewareOptions, PaymentRequest } from './types';
-import type { X402PaymentRequired } from '@eigenx402/types';
+import type { X402PaymentRequired } from '@mugdha26/eigenx402-types';
 import { createPaymentRequirement, parsePaymentHeader } from './utils';
 import { PaymentVerifier } from './verifier';
 

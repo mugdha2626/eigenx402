@@ -25,13 +25,13 @@ Users pay $0.05 USDC per AI request. No API keys, no subscriptions - just pay an
 Install the client SDK:
 
 ```bash
-npm install @eigenx402/client-sdk ethers
+npm install @mugdha26/eigenx402-client-sdk ethers
 ```
 
 Make a paid AI request:
 
 ```typescript
-import { EigenX402Client } from '@eigenx402/client-sdk';
+import { EigenX402Client } from '@mugdha26/eigenx402-client-sdk';
 import { ethers } from 'ethers';
 
 // Connect wallet

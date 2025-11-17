@@ -1,5 +1,5 @@
 {
-  "name": "@eigenx402/client-sdk",
+  "name": "@mugdha26/eigenx402-client-sdk",
   "version": "1.0.0",
   "description": "Client SDK for EigenX402 - Pay-per-use AI inference with crypto payments",
   "main": "./dist/index.js",
@@ -30,7 +30,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mugdha2626/eigenx402.git",
+    "url": "git+https://github.com/mugdha2626/eigenx402.git",
     "directory": "packages/client-sdk"
   },
   "bugs": {
@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/mugdha2626/eigenx402#readme",
   "dependencies": {
-    "@eigenx402/types": "^1.0.0",
+    "@mugdha26/eigenx402-types": "^1.0.0",
     "ethers": "^6.10.0"
   },
   "devDependencies": {

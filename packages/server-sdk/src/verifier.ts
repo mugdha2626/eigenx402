@@ -3,7 +3,7 @@
  */
 
 import { ethers } from 'ethers';
-import type { X402PaymentPayload } from '@eigenx402/types';
+import type { X402PaymentPayload } from '@mugdha26/eigenx402-types';
 
 /**
  * EIP-3009 TransferWithAuthorization domain and types

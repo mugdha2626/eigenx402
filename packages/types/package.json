@@ -1,5 +1,5 @@
 {
-  "name": "@eigenx402/types",
+  "name": "@mugdha26/eigenx402-types",
   "version": "1.0.0",
   "description": "TypeScript types for EigenX402 protocol",
   "main": "./dist/index.js",
@@ -24,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mugdha2626/eigenx402.git",
+    "url": "git+https://github.com/mugdha2626/eigenx402.git",
     "directory": "packages/types"
   },
   "bugs": {

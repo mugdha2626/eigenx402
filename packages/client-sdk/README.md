@@ -5,7 +5,7 @@ Client SDK for EigenX402 - Pay-per-use AI inference with crypto payments in a TE
 ## Installation
 
 ```bash
-npm install @eigenx402/client-sdk ethers
+npm install @mugdha26/eigenx402-client-sdk ethers
 ```
 
 ## Quick Start
@@ -164,7 +164,7 @@ import type {
   JobResult, 
   ClientConfig,
   X402PaymentPayload 
-} from '@eigenx402/client-sdk';
+} from '@mugdha26/eigenx402-client-sdk';
 ```
 
 ## Links

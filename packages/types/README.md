@@ -5,7 +5,7 @@ TypeScript type definitions for the EigenX402 protocol.
 ## Installation
 
 ```bash
-npm install @eigenx402/types
+npm install @mugdha26/eigenx402-types
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ import type {
   X402PaymentRequired,
   JobCreateResponse,
   JobResult
-} from '@eigenx402/types';
+} from '@mugdha26/eigenx402-types';
 ```
 
 ## Type Definitions

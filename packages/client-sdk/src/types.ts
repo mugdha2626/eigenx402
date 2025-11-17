@@ -2,7 +2,7 @@
  * Client SDK types
  */
 
-import type { ComputeProof } from '@eigenx402/types';
+import type { ComputeProof } from '@mugdha26/eigenx402-types';
 
 export interface ClientConfig {
   serverUrl: string;

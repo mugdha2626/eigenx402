@@ -14,7 +14,7 @@ import type {
   JobDetails,
   JobReplayResponse,
   X402PaymentPayload
-} from '@eigenx402/types';
+} from '@mugdha26/eigenx402-types';
 import type { ClientConfig, CreateJobOptions, JobResult } from './types';
 import { signPaymentAuthorization } from './signer';
 

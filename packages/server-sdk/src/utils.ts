@@ -3,7 +3,7 @@
  */
 
 import { Request } from 'express';
-import type { X402PaymentPayload, X402PaymentRequired, X402PaymentRequirement } from '@eigenx402/types';
+import type { X402PaymentPayload, X402PaymentRequired, X402PaymentRequirement } from '@mugdha26/eigenx402-types';
 import type { PaymentMiddlewareOptions } from './types';
 
 /**
