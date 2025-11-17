@@ -1,12 +1,36 @@
 {
   "name": "@eigenx402/types",
   "version": "1.0.0",
+  "description": "TypeScript types for EigenX402 protocol",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
   },
+  "keywords": [
+    "eigenx402",
+    "x402",
+    "types",
+    "typescript",
+    "crypto-payments"
+  ],
+  "author": "EigenX402",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mugdha2626/eigenx402.git",
+    "directory": "packages/types"
+  },
+  "bugs": {
+    "url": "https://github.com/mugdha2626/eigenx402/issues"
+  },
+  "homepage": "https://github.com/mugdha2626/eigenx402#readme",
   "devDependencies": {
     "typescript": "^5.3.3"
   }

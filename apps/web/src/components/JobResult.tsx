@@ -34,7 +34,7 @@ export function JobResult({ result, onReset }: JobResultProps) {
       {/* Success Banner */}
       <div className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-200 rounded-lg p-6">
         <div className="flex items-center space-x-3 mb-2">
-          <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white text-xl">
+          <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
             ✓
           </div>
           <div>
@@ -82,8 +82,7 @@ export function JobResult({ result, onReset }: JobResultProps) {
 
       {/* Output Section */}
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-4 flex items-center">
-          <span className="mr-2">🤖</span>
+        <h2 className="text-xl font-semibold mb-4">
           AI Response
         </h2>
         <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-6 border border-blue-200">
@@ -93,8 +92,7 @@ export function JobResult({ result, onReset }: JobResultProps) {
 
       {/* Interactive Verification */}
       <div className="bg-white rounded-lg shadow-md p-6 border-2 border-purple-200">
-        <h2 className="text-xl font-semibold mb-2 flex items-center">
-          <span className="mr-2">🔄</span>
+        <h2 className="text-xl font-semibold mb-2">
           Verify Determinism
         </h2>
         <p className="text-gray-600 mb-4 text-sm">
@@ -104,7 +102,7 @@ export function JobResult({ result, onReset }: JobResultProps) {
         {verified !== null && (
           <div className={`p-4 rounded-lg mb-4 ${verified ? 'bg-green-50 border-2 border-green-300' : 'bg-red-50 border-2 border-red-300'}`}>
             <p className={`font-bold text-lg ${verified ? 'text-green-800' : 'text-red-800'}`}>
-              {verified ? '✓ Verification Passed' : '✗ Verification Failed'}
+              {verified ? 'Verification Passed' : 'Verification Failed'}
             </p>
             <p className={`text-sm mt-1 ${verified ? 'text-green-600' : 'text-red-600'}`}>
               {verified
@@ -119,14 +117,14 @@ export function JobResult({ result, onReset }: JobResultProps) {
           disabled={verifying}
           className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg"
         >
-          {verifying ? '🔄 Verifying...' : '▶ Verify Output Now'}
+          {verifying ? 'Verifying...' : 'Verify Output Now'}
         </button>
       </div>
 
       {/* Technical Details (Collapsible) */}
       <details className="bg-white rounded-lg shadow-md p-6">
         <summary className="cursor-pointer font-semibold text-gray-700 hover:text-gray-900">
-          📋 Technical Proof Details (for developers)
+          Technical Proof Details (for developers)
         </summary>
         <div className="mt-4 space-y-3">
           <ProofField label="Blockchain Transaction" value={result.txHash} link={`https://sepolia.basescan.org/tx/${result.txHash}`} />

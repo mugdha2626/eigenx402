@@ -1,12 +1,42 @@
 {
   "name": "@eigenx402/client-sdk",
   "version": "1.0.0",
+  "description": "Client SDK for EigenX402 - Pay-per-use AI inference with crypto payments",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
   },
+  "keywords": [
+    "eigenx402",
+    "x402",
+    "crypto-payments",
+    "usdc",
+    "base",
+    "eigenai",
+    "eigencompute",
+    "tee",
+    "ai",
+    "inference",
+    "verifiable-compute"
+  ],
+  "author": "EigenX402",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mugdha2626/eigenx402.git",
+    "directory": "packages/client-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/mugdha2626/eigenx402/issues"
+  },
+  "homepage": "https://github.com/mugdha2626/eigenx402#readme",
   "dependencies": {
     "@eigenx402/types": "^1.0.0",
     "ethers": "^6.10.0"

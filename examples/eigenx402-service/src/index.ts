@@ -117,41 +117,6 @@ app.post('/api/generate-text',
 );
 
 // ============================================================================
-// PAID ENDPOINT - Custom Processing
-// ============================================================================
-
-app.post('/api/process-data',
-  requirePayment({
-    amount: toUSDCAtomicUnits('0.10'),
-    asset: PAYMENT_CONFIG.usdcAddress,
-    network: PAYMENT_CONFIG.network,
-    payTo: PAYMENT_CONFIG.merchantWallet,
-    merchantPrivateKey: PAYMENT_CONFIG.merchantPrivateKey,
-    rpcUrl: 'https://sepolia.base.org',
-    chainId: 84532
-  }),
-  async (req, res) => {
-    try {
-      const { data } = req.body;
-
-      // Your custom processing logic here
-      const result = {
-        processed: data,
-        timestamp: Date.now(),
-        teeProof: process.env.EIGEN_IMAGE_DIGEST
-      };
-
-      res.json({
-        result,
-        txHash: (req as any).txHash
-      });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
-    }
-  }
-);
-
-// ============================================================================
 // Helper Functions
 // ============================================================================
 
@@ -176,24 +141,21 @@ app.listen(PORT, '0.0.0.0', () => {
 ║  EigenX402 Payment Gateway (TEE)                             ║
 ╚══════════════════════════════════════════════════════════════╝
 
-🚀 Server running on port ${PORT} (bound to 0.0.0.0)
+Server running on port ${PORT} (bound to 0.0.0.0)
 
-📍 Endpoints:
+Endpoints:
    - GET  /health                (free)
    - POST /api/generate-text     ($${PAYMENT_CONFIG.priceUSD} USDC)
-   - POST /api/process-data      ($0.10 USDC)
 
-🔐 Payment Configuration:
+Payment Configuration:
    - Merchant: ${PAYMENT_CONFIG.merchantWallet}
    - Network: ${PAYMENT_CONFIG.network}
    - Real Settlement: ${PAYMENT_CONFIG.enableRealSettlement ? 'ENABLED' : 'DEMO MODE'}
 
-🔒 TEE Status:
+TEE Status:
    - Image: ${process.env.EIGEN_IMAGE_DIGEST || 'local-dev'}
    - Mnemonic: ${process.env.MNEMONIC ? 'Available (KMS-generated)' : 'Not configured'}
    - Attestation: ${process.env.EIGEN_ATTESTATION ? 'Available' : 'Not configured'}
-
-💡 Use EigenX402 widgets to integrate with any website!
   `);
 });
 
