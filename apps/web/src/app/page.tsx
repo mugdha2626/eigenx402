@@ -6,7 +6,7 @@ import { JobForm } from '@/components/JobForm';
 import { JobResult } from '@/components/JobResult';
 import { WalletConnect } from '@/components/WalletConnect';
 import { useWallet } from '@/hooks/useWallet';
-import type { JobResult as JobResultType } from '@eigenx402/client-sdk';
+import type { JobResult as JobResultType } from '@mugdha26/eigenx402-client-sdk';
 
 export default function Home() {
   const { connected, address, signer, connect, disconnect } = useWallet();

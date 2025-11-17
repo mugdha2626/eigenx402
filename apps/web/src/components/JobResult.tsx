@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { JobResult as JobResultType } from '@eigenx402/client-sdk';
+import type { JobResult as JobResultType } from '@mugdha26/eigenx402-client-sdk';
 
 interface JobResultProps {
   result: JobResultType;

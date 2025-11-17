@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { EigenX402Client } from '@eigenx402/client-sdk';
-import type { JobResult } from '@eigenx402/client-sdk';
+import { EigenX402Client } from '@mugdha26/eigenx402-client-sdk';
+import type { JobResult } from '@mugdha26/eigenx402-client-sdk';
 
 interface JobFormProps {
   signer: any;
