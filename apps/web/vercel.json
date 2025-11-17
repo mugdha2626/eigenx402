@@ -1,4 +1,4 @@
 {
-  "installCommand": "cd ../.. && npm install --workspace=apps/web",
+  "installCommand": "npm install",
   "buildCommand": "npm run build"
 }
