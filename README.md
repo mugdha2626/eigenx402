@@ -14,7 +14,7 @@ Users pay $0.05 USDC per AI request. No API keys, no subscriptions - just pay an
 
 ## Live Service
 
-**Endpoint:** `http://34.9.138.101:8080`
+**Endpoint:** `https://eigenx402-production.up.railway.app`
 
 **Pricing:** $0.05 USDC per request (Base Sepolia testnet)
 
@@ -40,7 +40,7 @@ const signer = provider.getSigner();
 
 // Initialize client
 const client = new EigenX402Client({
-  serverUrl: 'http://34.9.138.101:8080',
+  serverUrl: 'https://eigenx402-production.up.railway.app',
   signerOrProvider: signer
 });
 

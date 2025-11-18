@@ -20,7 +20,7 @@ const signer = provider.getSigner();
 
 // Initialize client
 const client = new EigenX402Client({
-  serverUrl: 'http://34.9.138.101:8080',
+  serverUrl: 'https://eigenx402-production.up.railway.app',
   signerOrProvider: signer
 });
 
